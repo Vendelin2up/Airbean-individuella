@@ -6,9 +6,10 @@ import session from "express-session"; // for handling user sessions - login sta
 
 import homeRouter from "./home.js";
 import aboutRouter from "./about.js";
-import orderRouter from './order.js'
-import cartRouter from './cart.js'
-import authRouter from './auth.js'
+import orderRouter from "./order.js";
+import cartRouter from "./cart.js";
+import authRouter from "./auth.js";
+import adminRouter from "./admin.js";
 
 import sessionMiddleware from "../middlewares/session.js";
 
@@ -33,11 +34,11 @@ router.use(
 router.use(sessionMiddleware);
 
 // Routes
-router.use('/', homeRouter)
-router.use('/about', aboutRouter)
-router.use('/order', orderRouter)
-router.use('/cart', cartRouter)
-router.use('/account', authRouter)
-
+router.use("/", homeRouter);
+router.use("/about", aboutRouter);
+router.use("/order", orderRouter);
+router.use("/cart", cartRouter);
+router.use("/account", authRouter);
+router.use("/admin", adminRouter);
 
 export default router;

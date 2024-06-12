@@ -16,12 +16,32 @@ const getUserById = (userId, callback) => {
   userDb.findOne({ userId }, callback);
 }; // Funktionen används för att hämta en användare från databasen baserat på användar-ID.
 
-/*module.exports = {
-  createUser,
-  getUserById
-};*/
 const validateUser = (username, password, callback) => {
   userDb.findOne({ username: username, password: password }, callback);
 };
+
+const addAdminUser = async () => {
+  const adminUser = {
+    userid: uuidv4(),
+    username: "admin",
+    password: "admin123",
+    role: "admin",
+    orders: [],
+  };
+
+  userDb.findOne({ username: "admin" }, (err, existingUser) => {
+    if (!existingUser) {
+      userDb.insert(adminUser, (err, newDoc) => {
+        if (err) {
+          console.error("Failed to create admin user", err);
+        } else {
+          console.log("Admin user successfully created");
+        }
+      });
+    }
+  });
+};
+
+addAdminUser();
 
 export { createUser, getUserById, validateUser };
